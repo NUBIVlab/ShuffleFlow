@@ -1,0 +1,44 @@
+name: shuffleflow
+_target_: flows.shuffleflow.ShuffleFlow
+
+network_config:
+  name: realnvp
+  downsample: 4
+  base_flows: 8
+  shuffle_flows: 8
+  patch_flows: 0
+  embed_dim: 256
+
+  affine: true
+  permute: random
+  softplus: false
+  sigmoid: false
+
+  decoder:
+    seqfrac: 0.25
+    batch_norm: true
+
+  encoder:
+    hidden_layers: 3
+    hidden_features: 128
+    act_func: sin
+    pos_enc: false
+    num_freqs: 7
+
+
+loss_config:
+  alpha: 1.0
+  sigma: 0.01
+  anneal: llh
+  starting_order: 2.0
+  decay_rate: 1000
+  beta: 1.0
+
+optim_config:
+  optimizer: adam
+  batch_size: 32
+  lr: 1e-4
+  weight_decay: 0.0
+  clip: 1.0
+  ema: false
+  ema_decay: 0.99

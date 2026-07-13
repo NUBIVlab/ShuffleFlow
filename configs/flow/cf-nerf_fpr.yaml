@@ -1,0 +1,39 @@
+name: cf-nerf
+_target_: flows.cf_nerf.CFNeRF
+
+network_config:
+  flow_func: planar # affine, planar, radial
+  num_flows: 16
+  embed_dim: 256
+  softplus: false
+  sigmoid: true
+
+  decoder:
+    hidden_layers: 2
+    hidden_features: 64
+    batch_norm: true
+
+  encoder:
+    hidden_layers: 3
+    hidden_features: 128
+    act_func: sin
+    pos_enc: false
+    num_freqs: 7
+
+loss_config:
+  alpha: 1.0
+  sigma: 0.01
+  anneal: llh
+  starting_order: 2.0
+  decay_rate: 1000
+  beta: 1.0
+
+optim_config:
+  optimizer: adam
+  batch_size: 32
+  lr: 1e-4
+  weight_decay: 0.0
+  clip: 1.0
+  ema: false
+  ema_decay: 0.99
+  

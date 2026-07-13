@@ -1,0 +1,36 @@
+name: gaussian_deblur
+
+operator:
+  _target_: forward_operators.deblur.Deblur
+  name: gaussian_deblur
+  unnorm_shift: 1.0
+  unnorm_scale: 0.5
+  sigma_kernel: 3.0
+  sigma_noise: 0.02
+
+dataset: &inverse_dataset
+  _target_: datasets.test_dataset.DeblurDataset
+  name: afhq-v2
+  data_path: <path-to-data>
+  group: all
+  img_size: 256
+  num_channels: 1
+  n_dims: 2
+  normalize: false
+  centered: false
+  idx_list: null
+  cmap: 'gray'
+
+train_dataset:
+  <<: *inverse_dataset
+  _target_: datasets.train_dataset.AFHQv2Dataset
+
+
+data_generator:
+  _target_: data_generators.deblur.DeblurDataGenerator
+  operator: ${inverse_problem.operator}
+  dataset: ${inverse_problem.dataset}
+  n_vis: 20
+
+evaluator:
+  _target_: evaluators.image.ImageEvaluator

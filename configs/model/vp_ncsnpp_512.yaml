@@ -1,0 +1,28 @@
+name: vp_ncsnpp_512
+
+model_config:
+  _target_: models.precond.VPPrecond
+  architecture: ncsnpp
+  img_resolution: 512
+  img_channels: 1
+  model_channels: 64
+  num_res_blocks: 1
+  channel_mult: [1, 2, 2, 2]
+  attn_resolutions: [32, 16]
+  dropout: 0.0
+
+loss_config:
+  _target_: models.loss.VPLoss
+  name: vp
+
+
+optim_config:
+  optimizer: adam
+  lr: 1e-4
+  batch_size: 16
+  weight_decay: 0.0
+  warmup_steps: 500
+  clip: 1.0
+  ema_decay: 0.9999
+  ema_halflife_nimg: 204800
+  ema_rampup_ratio: 0.05

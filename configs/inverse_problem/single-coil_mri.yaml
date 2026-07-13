@@ -1,0 +1,42 @@
+name: single-coil_mri
+
+operator:
+  _target_: forward_operators.single_coil_mri.SingleCoilMRI
+  name: single-coil_mri
+  unnorm_shift: 1.0
+  unnorm_scale: 0.5
+  mask:
+    name: cartesian
+    acceleration: 4.0
+    orientation: vertical
+    pattern: random
+    seed: 235235
+  sigma_noise: 0.02
+
+dataset: &inverse_dataset
+  _target_: datasets.test_dataset.SingleCoilMRIDataset
+  name: fastmri
+  data_path: <path-to-data>
+  group: knee
+  coil: single
+  img_size: 256
+  num_channels: 1
+  n_dims: 2
+  normalize: true
+  centered: false
+  cmap: bone
+  idx_list: null
+
+train_dataset:
+  <<: *inverse_dataset
+  _target_: datasets.train_dataset.fastMRIDataset
+
+data_generator:
+  _target_: data_generators.mri.MRIDataGenerator
+  operator: ${inverse_problem.operator}
+  dataset: ${inverse_problem.dataset}
+  n_vis: 20
+
+evaluator:
+  _target_: evaluators.image.ImageEvaluator
+

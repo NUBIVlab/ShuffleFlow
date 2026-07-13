@@ -1,0 +1,4 @@
+name: wiener
+_target_: samplers.wiener.Wiener
+
+lam: 0.01

@@ -1,0 +1,8 @@
+name: red-diff
+_target_: samplers.red_diff.REDDiff
+
+num_steps: 1000
+measurement_weight: 1.0
+base_lr: 2e-2
+base_lambda: 0.25
+lambda_schedule: 'constant'

@@ -1,0 +1,11 @@
+name: diffusion
+_target_: samplers.diffusion.DiffusionSampler
+
+diffusion_scheduler_config:
+  num_steps: 1000
+  sigma_max: 100.0
+  sigma_min: 0.01
+  schedule: 'vp'
+  timestep: 'vp'
+  scaling: 'vp'
+sde: true

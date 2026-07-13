@@ -1,0 +1,22 @@
+defaults:
+  - _self_
+  - hydra: default
+  - flow: shuffleflow
+  - inverse_problem: single-coil_mri
+  - prior: surrogate-score
+  - model: vp_ncsnpp_256
+
+name: variational_inference 
+model_save_path: 'saved_models/diffusion/'
+pretrained_epochs: 1000
+
+wandb: false
+n_epochs: 5000
+eval_interval: 1000
+auto_resume: true
+max_resume_attempts: 3
+save_checkpoint: false
+num_samples: 128
+num_samples_save: 16
+verbose: true
+result_path: 'results_iccp/'

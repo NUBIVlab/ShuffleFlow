@@ -1,0 +1,29 @@
+name: dpi
+_target_: flows.dpi.DPI
+
+network_config:
+  name: realnvp
+  num_flows: 16
+  affine: true
+  seqfrac: 32
+  permute: random
+  batch_norm: true
+  softplus: false
+  sigmoid: true
+
+loss_config:
+  alpha: 1.0
+  sigma: 0.01
+  anneal: llh
+  starting_order: 2.0
+  decay_rate: 1000
+  beta: 1.0
+
+optim_config:
+  optimizer: adam
+  batch_size: 32
+  lr: 5e-5
+  weight_decay: 0.0
+  clip: 1.0
+  ema: false
+  ema_decay: 0.99

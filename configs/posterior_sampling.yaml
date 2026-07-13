@@ -1,0 +1,17 @@
+defaults:
+  - _self_
+  - hydra: default
+  - sampler: diffusion
+  - inverse_problem: single-coil_mri
+  - model: vp_ncsnpp_256  # Default diffusion model to use.
+
+name: posterior_sampling
+model_save_path: 'saved_models/diffusion/'
+pretrained_epochs: 1000
+
+wandb: false
+num_samples: 128
+num_samples_save: 4
+verbose: true
+result_path: 'results_iccp/'
+

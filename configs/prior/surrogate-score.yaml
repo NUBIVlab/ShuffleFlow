@@ -1,0 +1,9 @@
+name: surrogate-score
+_target_: priors.surrogate_score.SurrogateScore
+
+weight: 1.0
+sde_config:
+  name: 'vp'
+  N: 1000
+  beta_min: 0.1
+  beta_max: 20.

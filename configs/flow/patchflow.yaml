@@ -1,0 +1,43 @@
+name: patchflow
+_target_: flows.patchflow.PatchFlow
+
+network_config:
+  name: realnvp
+  downsample: 8
+  base_flows: 0
+  patch_flows: 8
+  embed_dim: 64
+
+  affine: true
+  permute: random
+  softplus: false
+  sigmoid: false
+
+  decoder:
+    seqfrac: 4
+    batch_norm: false
+
+  encoder:
+    hidden_layers: 3
+    hidden_features: 128
+    act_func: sin
+    pos_enc: false
+    num_freqs: 7
+
+
+loss_config:
+  alpha: 1.0
+  sigma: 0.02
+  anneal: false
+  starting_order: 0
+  decay_rate: 1000
+  beta: 1.0
+
+optim_config:
+  optimizer: adam
+  batch_size: 32
+  lr: 1e-4
+  weight_decay: 0.0
+  clip: 1.0
+  ema: true
+  ema_decay: 0.99

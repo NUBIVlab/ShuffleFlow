@@ -1,0 +1,5 @@
+name: l2-score
+_target_: priors.l2_score.L2Score
+
+weight: 1.0
+sigma: 0.01

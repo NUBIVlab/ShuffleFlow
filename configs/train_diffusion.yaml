@@ -1,0 +1,16 @@
+defaults:
+  - _self_
+  - hydra: default
+  - inverse_problem: single-coil_mri
+  - model: vp_ncsnpp_256
+
+
+
+n_epochs: 1000
+pretrained_epochs: 0
+save_interval: 20
+num_workers: 20
+pin_memory: False
+model_save_path: 'saved_models/diffusion/'
+
+

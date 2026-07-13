@@ -1,0 +1,12 @@
+name: dps
+_target_: samplers.dps.DPS
+
+diffusion_scheduler_config:
+  num_steps: 1000
+  sigma_max: 100.0
+  sigma_min: 0.01
+  schedule: 'vp'
+  timestep: 'vp'
+  scaling: 'vp'
+zeta: 1.0
+sde: true

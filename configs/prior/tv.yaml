@@ -1,0 +1,5 @@
+name: tv
+_target_: priors.tv.TotalVariation
+
+mode: anisotropic
+weight: 10.0

@@ -1,0 +1,7 @@
+defaults:
+  - _self_
+  - hydra: default
+  - inverse_problem: single-coil_mri
+
+
+

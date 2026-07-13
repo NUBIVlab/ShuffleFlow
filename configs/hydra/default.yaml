@@ -1,0 +1,45 @@
+
+run:
+  dir: outputs/${now:%Y-%m-%d}/${now:%H-%M-%S} # Standard Hydra output dir
+
+# --- Start of Logging Configuration ---
+job_logging:
+  version: 1
+  disable_existing_loggers: False # Keep existing loggers (e.g., from libraries)
+
+  formatters:
+    simple_formatter:
+      format: '[%(asctime)s][%(name)s][%(levelname)s] %(message)s'
+      datefmt: '%Y-%m-%d %H:%M:%S'
+    detailed_formatter:
+      format: '[%(asctime)s][%(levelname)s][%(filename)s:%(lineno)d] %(message)s'
+      datefmt: '%H:%M:%S'
+
+  handlers:
+    console:
+      class: logging.StreamHandler
+      formatter: simple_formatter
+      stream: ext://sys.stdout
+    file_handler:
+      class: logging.handlers.RotatingFileHandler
+      formatter: detailed_formatter
+      filename: ${hydra.run.dir}/app.log # Log file inside the Hydra output directory
+      maxBytes: 10485760 # 10 MB
+      backupCount: 5
+    error_file_handler:
+      class: logging.handlers.RotatingFileHandler
+      formatter: detailed_formatter
+      filename: ${hydra.run.dir}/error.log
+      maxBytes: 10485760 # 10 MB
+      backupCount: 2
+      level: ERROR # Only logs ERROR and critical
+
+  loggers:
+    my_app: # This is a custom logger for your application code
+      level: DEBUG
+      handlers: [console, file_handler]
+      propagate: False # Set to False if you don't want logs to propagate to the root logger
+
+  root: # Configuration for the root logger
+    level: INFO
+    handlers: [console, file_handler, error_file_handler] # Root logger can have multiple handlers
