@@ -25,6 +25,7 @@ This repository supports two inference modes:
 | **Posterior Sampling** | `ps_ddp.py` | Runs diffusion-based samplers (DAPS, DPS, PnP-DM, …) using a pretrained score model |
 
 Both modes use multi-GPU DDP via `torchrun` and [Hydra](https://hydra.cc) for config composition.
+The structure of this repository is built upon [InverseBench](https://github.com/devzhk/InverseBench).
 
 ---
 
